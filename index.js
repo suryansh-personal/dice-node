@@ -1,16 +1,13 @@
 const app = require('express')();
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
 const port = 8080;
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.json({"name": "Deployed Successfully"});
 });
-console.log(__dirname)
-io.on('connection', (socket) => {
-  socket.on('chat message', msg => {
-    io.emit('chat message', msg);
-  });
+
+app.get('/dice', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
 });
 
 http.listen(port, () => {
